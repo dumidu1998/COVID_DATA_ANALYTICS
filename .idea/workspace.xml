@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a56306a2-5694-4dfc-8f17-fc8352bfa91c" name="Default Changelist" comment="files added">
-      <change afterPath="$PROJECT_DIR$/src/models/CovidCase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaDataAnalytics/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaDataAnalytics/main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Date.java" afterDir="false" />
