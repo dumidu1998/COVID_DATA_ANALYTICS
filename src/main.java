@@ -1,3 +1,5 @@
+import models.CovidCase;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -5,19 +7,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import models.CovidCase;
-
 public class Main {
     static Scanner scanner = new Scanner(System.in);
+    static List<CovidCase> cases = new ArrayList<>();
 
     public static void main(String[] args) {
-        List<CovidCase> cases = new ArrayList<>();
         // read from csv
-        String csvFile = "src/COVID19BE_CASES_TESTDATA.csv";
+        String csvFile = "COVID19BE_CASES_TESTDATA.csv";
         makedataList(csvFile, cases);
         boolean exite = false;
         System.out.println(
                 "Welcome to the COVID-19 Data Analysis Program. Make a selection from the menu below regarding the information you would like to see.");
+        // List<CovidCase> filteredcasesbyCountry = cases.stream().filter(c ->
+        // c.getCountry().equals("Belgium"))
+        // .collect(Collectors.toList());
+        // List<CovidCase> filteredcasesbydate = cases.stream().filter(c -> c.getDay()
+        // == 1).collect(Collectors.toList());
+        // // System.out.println(filteredcasesbyCountry);
+        // System.out.println(filteredcasesbydate.size());
+        // int total = cases.stream().filter(c ->
+        // c.getCountry().equals("Belgium")).mapToInt(c -> c.getCases()).sum();
+        // System.out.println(total);
+
         do {
             System.out.println("Please Select the Menu from Below!");
             System.out.println("1. Statistics of entire nation");
@@ -95,49 +106,76 @@ public class Main {
     public static boolean showEntrieNationData(int selection) {
         switch (selection) {
             case 1:
-                System.out.println("Total number of COVID-19 cases: ");
+                System.out.print("Total number of COVID-19 cases: ");
+                System.out.println(cases.stream().mapToInt(c -> c.getCases()).sum());
                 break;
             case 2:
-                System.out.println("Total number of COVID-19 cases of male: ");
+                System.out.print("Total number of COVID-19 cases of male: ");
+                System.out
+                        .println(cases.stream().filter(c -> c.getSex().equals("M")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 3:
-                System.out.println("Total number of COVID-19 cases of female:");
+                System.out.print("Total number of COVID-19 cases of female: ");
+                System.out
+                        .println(cases.stream().filter(c -> c.getSex().equals("F")).mapToInt(c -> c.getCases()).sum());
+                break;
+
             case 4:
-                System.out.println("Total number of COVID-19 cases for 0-9: ");
+                System.out.print("Total number of COVID-19 cases for 0-9: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getAgeGroup().equals("0-9")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 5:
-                System.out.println("Total number of COVID-19 cases for 10-19: ");
+                System.out.print("Total number of COVID-19 cases for 10-19: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getAgeGroup().equals("10-19")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 6:
-                System.out.println("Total number of COVID-19 cases for 20-29: ");
+                System.out.print("Total number of COVID-19 cases for 20-29: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getAgeGroup().equals("20-29")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 7:
                 System.out.println("Total number of COVID-19 cases for 30-39: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getAgeGroup().equals("30-39")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 8:
-                System.out.println("Total number of COVID-19 cases for 40-49: ");
+                System.out.print("Total number of COVID-19 cases for 40-49: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getAgeGroup().equals("40-49")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 9:
-                System.out.println("Total number of COVID-19 cases for 50-59: ");
+                System.out.print("Total number of COVID-19 cases for 50-59: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getAgeGroup().equals("50-59")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 10:
-                System.out.println("Total number of COVID-19 cases for 60-69: ");
+                System.out.print("Total number of COVID-19 cases for 60-69: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getAgeGroup().equals("60-69")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 11:
-                System.out.println("Total number of COVID-19 cases for 70-79: ");
+                System.out.print("Total number of COVID-19 cases for 70-79: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getAgeGroup().equals("70-79")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 12:
-                System.out.println("Total number of COVID-19 cases for 80-89: ");
+                System.out.print("Total number of COVID-19 cases for 80-89: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getAgeGroup().equals("80-89")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 13:
-                System.out.println("Total number of COVID-19 cases for 90+: ");
+                System.out.print("Total number of COVID-19 cases for 90+: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getAgeGroup().equals("90+")).mapToInt(c -> c.getCases()).sum());
                 break;
 
         }
         System.out.println("Would you like to make another selection?(Y or N)");
-        if (scanner.next().equals("Y") || scanner.next().equals("y")) {
+        if (scanner.nextLine().equals("Y") || scanner.nextLine().equals("y")) {
             return false;
-        } else if (scanner.next().equals("N") || scanner.next().equals("n")) {
+        } else if (scanner.nextLine().equals("N") || scanner.nextLine().equals("n")) {
             return true;
         }
         return true;
@@ -146,65 +184,168 @@ public class Main {
     public static boolean showRegionData(int selection) {
         switch (selection) {
             case 1:
-                System.out.println("Total number of COVID-19 cases in Flanders: ");
-                System.out.println("Total number of COVID-19 cases of male in Flanders: ");
-                System.out.println("Total number of COVID-19 cases of female in Flanders:");
-                System.out.println("Total number of COVID-19 cases for 0-9 in Flanders: ");
-                System.out.println("Total number of COVID-19 cases for 10-19 in Flanders: ");
-                System.out.println("Total number of COVID-19 cases for 20-29 in Flanders: ");
-                System.out.println("Total number of COVID-19 cases for 30-39 in Flanders: ");
-                System.out.println("Total number of COVID-19 cases for 40-49 in Flanders: ");
-                System.out.println("Total number of COVID-19 cases for 50-59 in Flanders: ");
-                System.out.println("Total number of COVID-19 cases for 60-69 in Flanders: ");
-                System.out.println("Total number of COVID-19 cases for 70-79 in Flanders: ");
-                System.out.println("Total number of COVID-19 cases for 80-89 in Flanders: ");
-                System.out.println("Total number of COVID-19 cases for 90+ in Flanders: ");
+                System.out.print("Total number of COVID-19 cases in Flanders: ");
+                System.out
+                        .println(cases.stream().filter(c -> c.getSex().equals("M")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases of male in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getSex().equals("F")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases of female in Flanders:");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 0-9 in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("0-9")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 10-19 in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("10-19")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 20-29 in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("20-29")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 30-39 in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("30-39")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 40-49 in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("40-49")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 50-59 in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("50-59")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 60-69 in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("60-69")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 70-79 in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("70-79")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 80-89 in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("80-89")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 90+ in Flanders: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Flanders"))
+                        .filter(c -> c.getAgeGroup().equals("90+")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 2:
-                System.out.println("Total number of COVID-19 cases in Brussels: ");
-                System.out.println("Total number of COVID-19 cases of male in Brussels: ");
-                System.out.println("Total number of COVID-19 cases of female in Brussels:");
-                System.out.println("Total number of COVID-19 cases for 0-9 in Brussels: ");
-                System.out.println("Total number of COVID-19 cases for 10-19 in Brussels: ");
-                System.out.println("Total number of COVID-19 cases for 20-29 in Brussels: ");
-                System.out.println("Total number of COVID-19 cases for 30-39 in Brussels: ");
-                System.out.println("Total number of COVID-19 cases for 40-49 in Brussels: ");
-                System.out.println("Total number of COVID-19 cases for 50-59 in Brussels: ");
-                System.out.println("Total number of COVID-19 cases for 60-69 in Brussels: ");
-                System.out.println("Total number of COVID-19 cases for 70-79 in Brussels: ");
-                System.out.println("Total number of COVID-19 cases for 80-89 in Brussels: ");
-                System.out.println("Total number of COVID-19 cases for 90+ in Brussels: ");
+                System.out.print("Total number of COVID-19 cases in Brussels: ");
+                System.out
+                        .println(cases.stream().filter(c -> c.getSex().equals("M")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases of male in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getSex().equals("F")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases of female in Brussels:");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 0-9 in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("0-9")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 10-19 in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("10-19")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 20-29 in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("20-29")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 30-39 in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("30-39")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 40-49 in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("40-49")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 50-59 in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("50-59")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 60-69 in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("60-69")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 70-79 in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("70-79")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 80-89 in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("80-89")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 90+ in Brussels: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Brussels"))
+                        .filter(c -> c.getAgeGroup().equals("90+")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 3:
-                System.out.println("Total number of COVID-19 cases in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases of male in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases of female in Wallonia:");
-                System.out.println("Total number of COVID-19 cases for 0-9 in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases for 10-19 in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases for 20-29 in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases for 30-39 in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases for 40-49 in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases for 50-59 in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases for 60-69 in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases for 70-79 in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases for 80-89 in Wallonia: ");
-                System.out.println("Total number of COVID-19 cases for 90+ in Wallonia: ");
+                System.out.print("Total number of COVID-19 cases in Wallonia: ");
+                System.out
+                        .println(cases.stream().filter(c -> c.getSex().equals("M")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases of male in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getSex().equals("F")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases of female in Wallonia:");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 0-9 in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("0-9")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 10-19 in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("10-19")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 20-29 in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("20-29")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 30-39 in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("30-39")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 40-49 in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("40-49")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 50-59 in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("50-59")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 60-69 in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("60-69")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 70-79 in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("70-79")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 80-89 in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("80-89")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 90+ in Wallonia: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Wallonia"))
+                        .filter(c -> c.getAgeGroup().equals("90+")).mapToInt(c -> c.getCases()).sum());
                 break;
             case 4:
-                System.out.println("Total number of COVID-19 cases in Unknown: ");
-                System.out.println("Total number of COVID-19 cases in Unknown: ");
-                System.out.println("Total number of COVID-19 cases of male in Unknown: ");
-                System.out.println("Total number of COVID-19 cases of female in Unknown:");
-                System.out.println("Total number of COVID-19 cases for 0-9 in Unknown: ");
-                System.out.println("Total number of COVID-19 cases for 10-19 in Unknown: ");
-                System.out.println("Total number of COVID-19 cases for 20-29 in Unknown: ");
-                System.out.println("Total number of COVID-19 cases for 30-39 in Unknown: ");
-                System.out.println("Total number of COVID-19 cases for 40-49 in Unknown: ");
-                System.out.println("Total number of COVID-19 cases for 50-59 in Unknown: ");
-                System.out.println("Total number of COVID-19 cases for 60-69 in Unknown: ");
-                System.out.println("Total number of COVID-19 cases for 70-79 in Unknown: ");
-                System.out.println("Total number of COVID-19 cases for 80-89 in Unknown: ");
-                System.out.println("Total number of COVID-19 cases for 90+ in Unknown: ");
+                System.out.print("Total number of COVID-19 cases in Unknown: ");
+                System.out.println(
+                        cases.stream().filter(c -> c.getRegion().equals("Unknown")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases of male in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getSex().equals("M")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases of female in Unknown:");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getSex().equals("F")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 0-9 in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getAgeGroup().equals("0-9")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 10-19 in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getAgeGroup().equals("10-19")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 20-29 in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getAgeGroup().equals("20-29")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 30-39 in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getAgeGroup().equals("30-39")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 40-49 in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getAgeGroup().equals("40-49")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 50-59 in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getAgeGroup().equals("50-59")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 60-69 in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getAgeGroup().equals("60-69")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 70-79 in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getAgeGroup().equals("70-79")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 80-89 in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getAgeGroup().equals("80-89")).mapToInt(c -> c.getCases()).sum());
+                System.out.print("Total number of COVID-19 cases for 90+ in Unknown: ");
+                System.out.println(cases.stream().filter(c -> c.getRegion().equals("Unknown"))
+                        .filter(c -> c.getAgeGroup().equals("90+")).mapToInt(c -> c.getCases()).sum());
                 break;
         }
         return false;

@@ -35,11 +35,15 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="GitIgnore" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
     <configuration name="dataanalytics" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="main" />
+      <option name="ALTERNATIVE_JRE_PATH" value="14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="JavaDataAnalytics" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -64,7 +68,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1634198870812</updated>
-      <workItem from="1634198872306" duration="2657000" />
+      <workItem from="1634198872306" duration="3762000" />
     </task>
     <task id="LOCAL-00001" summary="files added">
       <created>1634201431842</created>
